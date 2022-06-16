@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import logout, login, authenticate
+from django.shortcuts import render
 
-#!LOGOUT
-def user_logout(request):
-    messages.success(request, 'You logged out!')
-    logout(request)
-    return redirect('home')
+def login(request):
+    return render(request, "users/login.html")
+def logout(request):
+    return render(request, "users/logout.html")
+def profile(request):
+    return render(request, "users/profile.html")
+def register(request):
+    return render(request, "users/register.html")
