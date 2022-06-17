@@ -4,5 +4,11 @@
 
 <h1>POST CREATE</h1>
 
-{% endblock content %}
+{% comment %} Giriş yapmış bir kullanıcı varsa  {% endcomment %}
+{% if request.user.is_authenticated %}
+<h2>Wellcome {{request.user}}!</h2>
+{% else %}
+<h2>Wellcome Guest!</h2>
+{% endif %} 
 
+{% endblock content %}

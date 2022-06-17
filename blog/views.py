@@ -8,3 +8,5 @@ def post_create(request):
     return render(request, "blog/post_create.html")
 def post_update(request):
     return render(request, "blog/post_update.html")
+def navbar(request):
+    return render(request, "blog/navbar.html")
