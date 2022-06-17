@@ -1,24 +1,26 @@
-{% extends './base.html' %} {% block content %} {% load crispy_forms_tags %}
+{% extends './base.html' %} {% block title %}REGISTER{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <form action="" method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            {{ form_user|crispy }}
+            {{ form_profile|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have an account?<a class="ml-2" href="{% url 'login'  %}">Sign In</a>
+        </small>
+    </div>
 
-<h2>Registration Form</h2>
-
-{% if request.user.is_authenticated %}
-
-<h3>Thanks for registering</h3>
-
-{% else %}
-
-<h3>Fill out the form please!</h3>
-
-<form action="" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form_user | crispy }}
-  {{ form_profile | crispy }}
-  <button type="submit" class="btn btn-danger">Register</button>
-</form>
-{% endif %}
-
-{% endblock content %}
+</div>
+{% endblock %}
 
 
 
