@@ -26,7 +26,7 @@ def user_register(request):
             login(request, user) 
             messages.success(request, 'Register Successfull!')
 
-            return redirect('post_list')
+            return redirect('users:login')
 
     context = {
         "form_user": form_user,
@@ -47,7 +47,7 @@ def user_login(request):
         if user:
             messages.success(request,'login successfull')
             login(request, user)
-            return redirect('post_list')
+            return redirect('blog:post_list')
 
     return render(request, 'users/login.html', {"form":form}) 
 
@@ -57,6 +57,6 @@ def user_login(request):
 def user_logout(request):
     messages.success(request, 'You logged out!')
     logout(request)
-    return redirect('post_list')
+    return redirect('blog:post_list')
 def user_profile(request):
     return render(request, "users/profile.html")

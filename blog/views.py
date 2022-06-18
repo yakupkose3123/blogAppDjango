@@ -1,12 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Post
+from .forms import PostForm, CommentForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
+
+#! POST LIST
 def post_list(request):
-    return render(request, "blog/post_list.html")
+    qs = Post.objects.filter(status='PUB')
+    context = {
+        'object_list' : qs
+    }
+    return render (request, "blog/post_list.html", context )
+
+#! POST CREATE
+@login_required()
+def post_create(request):
+    # form = PostForm(request.POST or None, request.FILES or None)
+    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user #!formdaki author kısmı kullanıcıdan çekip ekliyoruz
+            post.save()
+            messages.success(request, "Post created successfully!")
+            return redirect("blog:post_list")
+    context = {
+        'form' : form
+    }
+    return render (request, "blog/post_create.html", context)
+
+
+
 def post_delete(request):
     return render(request, "blog/post_delete.html")
-def post_create(request):
-    return render(request, "blog/post_create.html")
+
 def post_update(request):
     return render(request, "blog/post_update.html")
-def navbar(request):
-    return render(request, "blog/navbar.html")
+
