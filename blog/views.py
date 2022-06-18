@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from turtle import ondrag
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
@@ -29,8 +30,16 @@ def post_create(request):
     context = {
         'form' : form
     }
-    return render (request, "blog/post_create.html", context)
+    return render(request, "blog/post_create.html", context)
 
+
+#! POST DETAİL
+def post_detail(request, slug):
+    obj = get_object_or_404(Post, slug = slug)
+    context = {
+        "object" : obj
+    }
+    return render(request, "blog/post_detail.html", context)
 
 
 def post_delete(request):

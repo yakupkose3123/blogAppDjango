@@ -23,7 +23,7 @@ class Category(models.Model):
 class Post(models.Model):
     OPTIONS = (
         ('DRA', 'DRAFT'),
-        ('PUB', 'PUBLISH'),
+        ('PUB', 'PUBLISHED'),
     )
 
     title = models.CharField(max_length=100)

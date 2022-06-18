@@ -15,7 +15,7 @@
             <img src="{{ obj.image.url }}" class="card-img-top" alt="post_image" style="width:15rem; height: 11rem; align-self:center;">
             <hr>
             <div class="card-body">
-                <h5 class="card-title"><a href="">{{obj.title}}</a></h5>
+                <h5 class="card-title"><a href="{% url 'blog:post_detail' object.slug %}">{{obj.title}}</a></h5>
                 <p class="card-text">{{obj.content|truncatechars:20}}</p>
                 
                 {% comment %} <p>
