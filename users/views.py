@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from django.contrib.auth import logout, login, authenticate
 from .forms import UserForm, UserProfileForm
+from .forms import RegistrationForm, UserUpdateForm, ProfileUpdateForm
 
 from django.contrib.auth.forms import AuthenticationForm #login için 
 
@@ -60,3 +61,21 @@ def user_logout(request):
     return redirect('blog:post_list')
 def user_profile(request):
     return render(request, "users/profile.html")
+
+
+#!PROFİLE
+def profile(request):
+    u_form = UserUpdateForm(request.POST or None, instance=request.user)
+    p_form = ProfileUpdateForm(request.POST or None, instance=request.user.profile, files=request.FILES)
+    
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        messages.success(request, "Your profile has been updated!")
+        return redirect(request.path)
+    
+    context = {
+        "u_form" : u_form,
+        "p_form" : p_form    
+    }
+    return render(request, "users/profile.html", context)

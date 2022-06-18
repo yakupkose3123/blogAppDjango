@@ -2,6 +2,7 @@ from django.db.models.signals import pre_save #!kaydetmeden önce
 from django.dispatch import receiver #!kaydet e bastığımda bunu yap sonra kaydet
 from django.template.defaultfilters import slugify #!boşlukların arasına - koyar
 from .models import Post 
+from .utils import get_random_code
 
 #*Bu dosyanın amacı otomatik slug oluşturmak
 #* apps.py da signals.py override etmeyi unutma
