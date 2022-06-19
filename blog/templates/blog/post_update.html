@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-<h1>POST UPDATE</h1>
-
-{% comment %} Giriş yapmış bir kullanıcı varsa  {% endcomment %}
-{% if request.user.is_authenticated %}
-<h2>Wellcome {{request.user}}!</h2>
-{% else %}
-<h2>Wellcome Guest!</h2>
-{% endif %} 
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h3>UPDATE POST</h3>
+    <hr />
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %} {{form|crispy}}
+      <br />
+      <button type="submit" class="btn btn-outline-info">UPDATE</button>
+    </form>
+  </div>
+</div>
 
 {% endblock content %}

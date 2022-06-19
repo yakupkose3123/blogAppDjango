@@ -1,3 +1,4 @@
+from multiprocessing import context
 from turtle import ondrag
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
@@ -20,7 +21,7 @@ def post_create(request):
     # form = PostForm(request.POST or None, request.FILES or None)
     form = PostForm()
     if request.method == "POST":
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES) #? Bu koşulu update deki 45. satır gibi de yapabiliriz. "form = PostForm(request.POST or None, request.FILES or None, instance=obj)"
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user #!formdaki author kısmı kullanıcıdan çekip ekliyoruz
@@ -36,15 +37,40 @@ def post_create(request):
 #! POST DETAİL
 def post_detail(request, slug):
     obj = get_object_or_404(Post, slug = slug)
+    context = { "object" : obj }
+    return render(request, "blog/post_detail.html", context)
+
+#! POST UPDATE
+@login_required()
+def post_update(request, slug):
+    obj = get_object_or_404(Post, slug = slug)
+    form = PostForm(request.POST or None, request.FILES or None, instance=obj) 
+
+    if form.is_valid():
+        form.save()
+        return redirect("blog:post_list")
+    
+    context = {
+        "object" : obj,
+        "form" : form
+    }
+
+    return render(request, "blog/post_update.html", context)
+
+#! POST DELETE
+@login_required()
+def post_delete(request, slug):
+    obj = get_object_or_404(Post, slug=slug) #slug ı slug olan objeyi al
+    if request.user.id != obj.author.id:
+        # return HttpResponse("You are not authorized!")
+        messages.warning(request, "You are not a writer of this post !")
+        return redirect("blog:post_list")
+    if request.method == "POST": 
+        obj.delete()
+        messages.success(request, "Post deleted !!")
+        return redirect("blog:post_list")
+    
     context = {
         "object" : obj
     }
-    return render(request, "blog/post_detail.html", context)
-
-
-def post_delete(request):
-    return render(request, "blog/post_delete.html")
-
-def post_update(request):
-    return render(request, "blog/post_update.html")
-
+    return render(request, "blog/post_delete.html", context)
