@@ -41,6 +41,15 @@ class Post(models.Model):
         verbose_name_plural = "POSTS"
     def __str__(self):
         return self.title
+    #! COMMENT COUNT
+    def comment_count(self):
+        return self.comment_set.all().count() #Comment modelime git(parent) tüm commentlerin sayısını al
+    #! VIEW COUNT
+    def view_count(self):
+        return self.postview_set.all().count()
+    #! LIKE COUNT
+    def like_count(self):
+        return self.like_set.all().count()
 
 
 #! COMMENT (YORUMLAR)
@@ -63,7 +72,7 @@ class Like(models.Model) :
      
      def __str__(self):
             return self.user.username
-#! POST VİEW (kaç defa görüntülendi)
+#! POST VİEW 
 class PostView(models.Model) :
      user = models.ForeignKey(User, on_delete=models.CASCADE)
      post = models.ForeignKey(Post, on_delete=models.CASCADE)

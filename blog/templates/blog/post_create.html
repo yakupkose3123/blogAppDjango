@@ -2,12 +2,14 @@
 
 {% block content %}
 
-<h1>POST CREATE</h1>
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type = "submit"> POST </button>
-</form> 
+<div class="container text-center">
+   <h1>POST CREATE</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type = "submit"> POST </button>
+    </form>  
+</div>
 
 
 
