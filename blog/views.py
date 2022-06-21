@@ -36,8 +36,21 @@ def post_create(request):
 
 #! POST DETAİL
 def post_detail(request, slug):
+    form = CommentForm()
     obj = get_object_or_404(Post, slug = slug)
-    context = { "object" : obj }
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid:
+            comment = form.save(commit=False) #!Comment i form ile kullanıcıdan al
+            comment.user = request.user #! User olarak şu anki userı al
+            comment.post = obj #! Bu yukarıda aldığım obj nin postunu al 
+            comment.save() #! sonra da formu database kaydet
+            return redirect("blog:post_detail", slug=slug) #! sonra da bir önceki sayfaya geri gönder
+            # return redirect(request.path)  buda üst satırla aynı
+    context = { 
+        "object" : obj,
+        "form" : form
+     }
     return render(request, "blog/post_detail.html", context)
 
 #! POST UPDATE
