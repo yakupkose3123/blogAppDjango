@@ -25,8 +25,8 @@
             </div>
 
             <div>
-                {% comment %}  {% endcomment %}
-            <form action="" method="POST">
+                {% comment %} Burada like için yaptığım forma da action a url tanımlamamın sebebi bu url aracılığıyla views daki like ulaşmak {% endcomment %}
+            <form action="{% url 'blog:like' object.slug %}" method="POST">
 
                 {% csrf_token %}
                 <input type="hidden" name="post">
@@ -68,6 +68,7 @@
         </div>
 
         <div class="m-3">
+            {% comment %} postun sahibi ile login olan kişi aynı kişiyse  {% endcomment %}
         {% if user.id == object.author.id %}
         <a href="{% url 'blog:post_update' object.slug %}" class="btn btn-info">Edit</a>
         <a href="{% url 'blog:post_delete' object.slug %}" class="btn btn-danger">Delete</a>

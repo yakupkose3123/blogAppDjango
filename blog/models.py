@@ -43,13 +43,17 @@ class Post(models.Model):
         return self.title
     #! COMMENT COUNT
     def comment_count(self):
-        return self.comment_set.all().count() #Comment modelime git(parent) tüm commentlerin sayısını al
+        return self.comment_set.all().count() #Comment modelime git(parent) tüm commentlerin sayısını al. Burada fonksiyonu oluştururken aşağıdaki ilgili class ın ilk harfini küçülterek alıyorum.
     #! VIEW COUNT
     def view_count(self):
         return self.postview_set.all().count()
     #! LIKE COUNT
     def like_count(self):
         return self.like_set.all().count()
+    #! COMMENTS
+    def comments(self):
+        return self.comment_set.all() #Oluşturulan tüm commentleri al
+    
 
 
 #! COMMENT (YORUMLAR)
