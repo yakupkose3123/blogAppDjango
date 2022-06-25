@@ -129,11 +129,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #! mediaların nereye kaydedeceği yolu belirle
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #! upload edilen media yı nereye kaydedeceğini belirtiyoruz
 # STATICFILES_DIRS = BASE_DIR / "static" #! appların dışında bir static tasdoyası oluşturup onu kullanmak istiyorsak bunu buraya eklemeliyiz
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4' #! crispy form default olaarak uniform geliyor onu bootstrap 4 ile değiştirdik
 
 LOGIN_REDIRECT_URL = "blog:list"
 

@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify #!boşlukların arasına - ko
 from .models import Post 
 from .utils import get_random_code
 
-#*Bu dosyanın amacı otomatik slug oluşturmak
+#*Bu dosyanın amacı otomatik slug oluşturmak, tetikleyici olarak düşün
 #* apps.py da signals.py override etmeyi unutma
 #* utils.py da random ıd oluşturuyoruz.
 
