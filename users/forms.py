@@ -4,10 +4,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 
 
-class UserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ('username', 'email',)
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
