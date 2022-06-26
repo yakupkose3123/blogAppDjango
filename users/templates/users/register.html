@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}Register{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section">
+<div class="content-section ">
     <form action="" method="post">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -9,7 +9,7 @@
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            <button class="btn btn-outline-info bg-primary text-light" type="submit">Sign Up</button>
         </div>
     </form>
     <div class="border-top pt-3">
