@@ -3,12 +3,12 @@
 
 {% block content %}
 
-<div class="container text-center  w-75">
+<div class="container text-center  w-75 ">
    <h1>POST CREATE</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form | crispy }}
-        <button type = "submit"> POST </button>
+        <button type = "submit" class ="btn btn-outline-info bg-primary text-light m-2 "> POST </button>
     </form>  
 </div>
 

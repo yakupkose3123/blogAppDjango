@@ -11,13 +11,13 @@
         <div class="form-group">
             <button class="btn btn-outline-info bg-primary text-light" type="submit">Login</button>
             <small class="text-muted ml-2">
-                <a href="">Forgot Password?</a>
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </small>
         </div>
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Need an account?<a class="ml-2" href="{% url 'users:register' %}">Sign Up Now</a>
+            Need an account?<a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
         </small>
     </div>
 
