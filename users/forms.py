@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import Profile
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 
@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         exclude = ('user',)
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()  #override ettik. boş bırakınca default required true oldu
@@ -31,7 +31,7 @@ class RegistrationForm(UserCreationForm):
 class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:
-        model = UserProfile
+        model = Profile
         fields = ("image", "bio")
 
 class UserUpdateForm(forms.ModelForm):
@@ -39,7 +39,6 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username", "email")
-
 
 class PasswordResetEmailCheck(PasswordResetForm):
     

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
-from .forms import UserProfileForm, UserUpdateForm, ProfileUpdateForm, RegistrationForm
+from .forms import UserUpdateForm, ProfileUpdateForm, RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm #login için 
 
 
@@ -52,7 +52,7 @@ def user_logout(request):
 @login_required
 def user_profile(request):
     u_form = UserUpdateForm(request.POST or None, instance=request.user)
-    p_form = ProfileUpdateForm(request.POST or None, instance=request.user, files=request.FILES)
+    p_form = ProfileUpdateForm(request.POST or None, instance=request.user.profile, files=request.FILES)
     
     if u_form.is_valid() and p_form.is_valid():
         u_form.save()
