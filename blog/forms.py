@@ -2,8 +2,8 @@ from django import forms
 from .models import Post, Comment, Category
 
 class PostForm(forms.ModelForm):
-    status = forms.ChoiceField(choices=Post.OPTIONS) # modeldeki optıons u kullanabiliriz
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select") #! Başka bir table daki fieldı dropdown olarak göstermmek için. 
+    status = forms.ChoiceField(choices=Post.OPTIONS)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select")
     class Meta:
         model = Post
         fields = (
