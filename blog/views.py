@@ -1,7 +1,7 @@
 from multiprocessing import context
 from turtle import ondrag
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Post,  Like, Comment
+from .models import Post,  Like, Comment, PostView
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -38,6 +38,9 @@ def post_create(request):
 def post_detail(request, slug):
     form = CommentForm()
     obj = get_object_or_404(Post, slug = slug)
+    if request.user.is_authenticated:
+        PostView.objects.get_or_create(user=request.user, post=obj)
+
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
