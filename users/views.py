@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required #!Login required decorater için, bu url ile girişlerini engeller.
 from django.contrib import messages
-from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import logout, login
 from .forms import UserUpdateForm, ProfileUpdateForm, RegistrationForm
-from django.contrib.auth.forms import AuthenticationForm #login için 
+from django.contrib.auth.forms import AuthenticationForm #!login için 
 
 
 #!REGISTER
 def user_register(request):
     form = RegistrationForm(request.POST or None) 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated: #! Eğer login se url e yazarak registera ulaşamasın diye.
         messages.warning(request, "You are already have an account!")
         return redirect("blog:post_list")
     if form.is_valid():
@@ -28,10 +28,8 @@ def user_register(request):
 #!LOGIN
 def user_login(request):
     form = AuthenticationForm(request, data=request.POST) 
-
     if form.is_valid():
         user = form.get_user() 
-
         if user:
             messages.success(request,'login successfull')
             login(request, user)
@@ -40,19 +38,18 @@ def user_login(request):
     return render(request, 'users/login.html', {"form":form}) 
 
 
-
 #!LOGOUT
 def user_logout(request):
     messages.success(request, 'You logged out!')
-    logout(request)
-    
+    logout(request)    
     return render(request, "users/logout.html")
 
 #!PROFİLE
+ #username ve email i biz user modelinden aldık, img ve bio yu da profile modelinden altık. Burada bu şek,lde iki formu birleştirebiliyoruz.
 @login_required
 def user_profile(request):
-    u_form = UserUpdateForm(request.POST or None, instance=request.user)
-    p_form = ProfileUpdateForm(request.POST or None, instance=request.user.profile, files=request.FILES)
+    u_form = UserUpdateForm(request.POST or None, instance=request.user)#?Burada request.user database de hangi user la login olduğunu bana veriyor
+    p_form = ProfileUpdateForm(request.POST or None, instance=request.user.profile, files=request.FILES) 
     
     if u_form.is_valid() and p_form.is_valid():
         u_form.save()

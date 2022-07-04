@@ -16,7 +16,7 @@
        <div class="container position-relative">
         {% if messages %}
         {% for message in messages %}
-
+        {% comment %} ! Aynı anda birden fazla mesaj olabilir diye for döngüsüne soktuk {% endcomment %}
         <div class="alert alert-{{ message.tags }}">
             {{ message }}
         </div>

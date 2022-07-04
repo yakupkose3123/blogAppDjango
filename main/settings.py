@@ -135,14 +135,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #! upload edilen media yı nereye k
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' #! crispy form default olaarak uniform geliyor onu bootstrap 4 ile değiştirdik
 
-LOGIN_REDIRECT_URL = "blog:list"
-
-LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "blog:list" #!Login olunca redırect adresini override ediyoruz.
+LOGIN_URL = "login" #!Login adresimi belirtiyoruz.
 
 #Sending email (gmail ayarlardan uygulamaya izin ver!)
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = config("EMAIL_USER")
-# EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_USER") #! .env e host emaili yaz
+EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD") #! .env e host emailin şifresini yaz, ancak bu emailin şifresini google ayarlarına yaparak aldığın şifreyi yaz.(https://www.youtube.com/watch?v=1YXVdyVuFGA)
